@@ -3,3 +3,15 @@
   color:rgb(235, 235, 235);
   font-family: 'Montserrat', sans-serif;
 }
+
+/* Remove number textfield arrows for most browsers */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Remove number textfield arrows for Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
