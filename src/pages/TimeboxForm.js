@@ -1,4 +1,3 @@
-import './TimeboxForm.css';
 import { Button } from '@material-ui/core';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
