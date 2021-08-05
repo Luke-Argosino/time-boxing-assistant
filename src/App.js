@@ -1,12 +1,13 @@
 import './App.css';
 import Header from './Header';
-import Body from './Body';
+import TimeboxForm from './pages/TimeboxForm';
+import Timebox from './pages/Timebox';
 
 export default function App() {
   return (
     <div className="App">
       <Header />
-      <Body />
+      <TimeboxForm />
     </div>
   );
 }
