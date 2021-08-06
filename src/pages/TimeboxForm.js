@@ -1,27 +1,34 @@
+import React, { useState } from 'react';
 import { Button } from '@material-ui/core';
-import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import { makeStyles } from '@material-ui/core';
 import { TextField } from '@material-ui/core';
 
-const useStyles = makeStyles({
-    field: {
-        marginTop: 20,
-        marginBottom: 20,
-        display: 'block'
-    }
-})
-
 export default function TimeboxForm() {
-    const classes = useStyles()
+    const [activity, setActivity] = useState()
+    const [breakTime, setBreakTime] = useState()
+    const [interval, setInterval] = useState()
+    const [startOnBreak, toggleStartBreak] = useState()
+    const [showTimer, toggleTimer] = useState()
+    const [sounds, toggleSounds] = useState()
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        
+        if  (activity && breakTime && interval) {
+
+        } else {
+            alert("Please ensure no fields are empty")
+        }
+    }
 
     return (   
         <div className="Body">
-            <form className="timeboxForm" autoComplete="off" noValidate>
+            <form className="timeboxForm" autoComplete="off" noValidate onSubmit={handleSubmit}>
                 <div>
                     I want to  
                     <TextField 
+                        onChange={(e) => setActivity(e.target.value)}
                         id="Activity" 
                         type="default" 
                         defaultValue="Code" 
@@ -31,6 +38,7 @@ export default function TimeboxForm() {
                     />
                     with
                     <TextField 
+                        onChange={(e) => setBreakTime(e.target.value)}
                         id="break" 
                         type="number" 
                         defaultValue="5"
@@ -40,6 +48,7 @@ export default function TimeboxForm() {
                     />
                     minute breaks every
                     <TextField 
+                        onChange={(e) => setInterval(e.target.value)}
                         id="interval" 
                         type="number" 
                         defaultValue="15" 
@@ -50,22 +59,28 @@ export default function TimeboxForm() {
                     minutes.
                 </div>
 
-                <div class="Checkbox">
+                <div className="Checkbox">
                     <FormControlLabel 
+                        onChange={(e) => toggleStartBreak(e.target.value)}
                         control={<Checkbox color="default" />}
                         label="Start on break"
                     />
                     <FormControlLabel 
+                        onChange={(e) => toggleTimer(e.target.value)}
                         control={<Checkbox color="default" />}
                         label="Show countdown timer"
                     />
                     <FormControlLabel 
+                        onChange={(e) => toggleSounds(e.target.value)}
                         control={<Checkbox color="default" />}
                         label="Notification sound"
                     />
                 </div>
 
-                <Button id="StartStopButton" variant="contained">
+                <Button id="StartStopButton" 
+                    type="submit"
+                    variant="contained"
+                >
                     Start
                 </Button>
             </form>

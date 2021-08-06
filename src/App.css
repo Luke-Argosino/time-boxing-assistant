@@ -9,8 +9,8 @@
 }
 
 .Header {
-  text-align: left;
-  padding-bottom:11%;
+  font-size: 30px;
+  padding-bottom:9%;
 }
 
 /* Remove number textfield arrows for most browsers */
