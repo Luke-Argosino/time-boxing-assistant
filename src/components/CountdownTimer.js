@@ -1,21 +1,23 @@
 import React, { useState } from 'react';
+import Bell from '../sounds/Bell.mp3'
 
 const CountdownTimer = (props) => {
-    const breakMinutes = props.breakMinutes
-    const interval = props.interval
-
     const { minutes = 0, seconds = 60 } = props.hoursMinSecs;
+    const [currentActivity, setCurrentActivity] = useState(props.activity);
     const [[mins, secs], setTime] = React.useState([minutes, seconds]);
-    const [onBreak, setOnBreak] = useState()
+    const [onBreak, setOnBreak] = useState(true);
+    const bell = new Audio(Bell);
 
-    console.log(breakMinutes, " ", interval)
+    React.useEffect(() => {
+        const timerCooldown = setInterval(() => tick(), 100);
+        return () => clearInterval(timerCooldown);
+    });
 
     const tick = () => {
         if (mins === 0 && secs === 0) {
             setOnBreak(!onBreak)
             setTimer()
-        }
-        if (secs === 0) {
+        } else if (secs === 0) {
             setTime([mins - 1, 59]);
         } else {
             setTime([mins, secs - 1]);
@@ -23,22 +25,23 @@ const CountdownTimer = (props) => {
     }
 
     const setTimer = () => {
+        if (props.sounds) {
+            bell.play();
+        }
         if (onBreak) {
-            console.log(breakMinutes)
-            setTime([parseInt(breakMinutes), parseInt(seconds)]);
+            setCurrentActivity("Break")
+            setTime([parseInt(props.breakTime), parseInt(seconds)]);
         } else {
-            console.log(minutes)
-            setTime([parseInt(minutes), parseInt(seconds)]);
+            setCurrentActivity(props.activity)
+            setTime([parseInt(props.interval), parseInt(seconds)]);
         }
     }
-    
-    React.useEffect(() => {
-        const timerId = setInterval(() => tick(), 1000);
-        return () => clearInterval(timerId);
-    });
 
     return (
         <div className="CountdownTimer">
+            <h1>
+                {currentActivity} for
+            </h1>
             <h1>
                 {mins.toString().padStart(2, '0')}:
                 {secs.toString().padStart(2, '0')}

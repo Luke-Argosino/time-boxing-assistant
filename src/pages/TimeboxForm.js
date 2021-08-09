@@ -15,7 +15,6 @@ const TimeboxForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(activity, " ", breakTime, " ", interval)
         if  (!activity || !breakTime || !interval) {
             alert("Please ensure no fields are empty")
         } else {
@@ -69,7 +68,7 @@ const TimeboxForm = () => {
                 </div>
                 <div className="Checkbox">
                     <FormControlLabel 
-                        onChange={(e) => toggleSounds(e.target.value)}
+                        onChange={(e) => toggleSounds(!sounds)}
                         control={<Checkbox color="default" />}
                         label="Notification sound"
                     />
