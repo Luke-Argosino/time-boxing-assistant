@@ -5,7 +5,7 @@ import TimeboxForm from './pages/TimeboxForm';
 import Timebox from './pages/Timebox';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-export default function App() {
+const App = () => {
   return (
     <Router>
       <div className="App">
@@ -25,3 +25,4 @@ export default function App() {
   );
 }
 
+export default App;

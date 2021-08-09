@@ -1,22 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
+import CountdownTimer from '../CountdownTimer';
 import { useHistory } from 'react-router-dom'
 import { Button } from '@material-ui/core';
 
-export default function Timebox(props) {
+const Timebox = (props) => {
     const history = useHistory();
-    console.log(history.location.state.activity.value)
-    console.log(history.location.state.breakTime.value)
-    console.log(history.location.state.interval.value)
 
     const handleClick = (e) => {
         e.preventDefault()
         history.push('/')
     }
 
+    const hoursMinSecs = {minutes: history.location.state.interval.value, seconds: 0}
+
     return (
         <div className="Timebox">
+            <h1 id="activity">
+                {history.location.state.activity.value} for
+            </h1>
             <h1>
-                {history.location.state.activity.value}
+                <CountdownTimer 
+                    hoursMinSecs={hoursMinSecs}
+                    breakTime={history.location.state.breakTime.value} 
+                    interval={history.location.state.interval.value}
+                    sounds={history.location.state.sounds.value}
+                />
             </h1>
             <Button id="StartStopButton" 
                 type="submit"
@@ -28,3 +36,5 @@ export default function Timebox(props) {
         </div>
     )
 }
+
+export default Timebox;
