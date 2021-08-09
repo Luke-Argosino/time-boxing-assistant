@@ -9,7 +9,7 @@ const CountdownTimer = (props) => {
     const bell = new Audio(Bell);
 
     React.useEffect(() => {
-        const timerCooldown = setInterval(() => tick(), 100);
+        const timerCooldown = setInterval(() => tick(), 1000);
         return () => clearInterval(timerCooldown);
     });
 
